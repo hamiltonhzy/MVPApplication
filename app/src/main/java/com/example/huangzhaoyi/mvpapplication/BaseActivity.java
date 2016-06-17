@@ -13,6 +13,8 @@ import com.example.huangzhaoyi.mvpapplication.Utils.TUtil;
  * Created by huangzhaoyi on 2016/6/17.
  */
 public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel> extends AppCompatActivity {
+    private static final int PRESENTER_CLASS_TYPE = 0;
+    private static final int MODEL_CLASS_TYPE = 1;
     public Context mContext;
     public T mPresenter;
     public E mModel;
@@ -21,8 +23,8 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.mContext = this;
-        this.mPresenter = TUtil.getT(this, 0);
-        this.mModel = TUtil.getT(this, 1);
+        this.mPresenter = TUtil.getT(this, PRESENTER_CLASS_TYPE);
+        this.mModel = TUtil.getT(this, MODEL_CLASS_TYPE);
         this.setContentView(getLayoutId());
         initView();
         initPresenter();

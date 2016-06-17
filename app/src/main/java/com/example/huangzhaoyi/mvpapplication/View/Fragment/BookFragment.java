@@ -1,4 +1,4 @@
-package com.example.huangzhaoyi.mvpapplication.Fragment;
+package com.example.huangzhaoyi.mvpapplication.View.Fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,9 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.huangzhaoyi.mvpapplication.Contract.BookContract;
-import com.example.huangzhaoyi.mvpapplication.Event.BaseEvent;
 import com.example.huangzhaoyi.mvpapplication.Event.BookEvent;
-import com.example.huangzhaoyi.mvpapplication.Presenter.BookPresenter;
 import com.example.huangzhaoyi.mvpapplication.R;
 import com.example.huangzhaoyi.mvpapplication.Utils.BusProvider;
 import com.squareup.otto.Subscribe;

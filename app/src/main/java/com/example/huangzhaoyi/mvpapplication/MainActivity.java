@@ -2,8 +2,7 @@ package com.example.huangzhaoyi.mvpapplication;
 
 import android.os.Bundle;
 
-import com.example.huangzhaoyi.mvpapplication.Contract.BookContract;
-import com.example.huangzhaoyi.mvpapplication.Fragment.BookFragment;
+import com.example.huangzhaoyi.mvpapplication.View.Fragment.BookFragment;
 import com.example.huangzhaoyi.mvpapplication.Model.BookModel;
 import com.example.huangzhaoyi.mvpapplication.Presenter.BookPresenter;
 import com.example.huangzhaoyi.mvpapplication.Utils.ActivityUtils;
