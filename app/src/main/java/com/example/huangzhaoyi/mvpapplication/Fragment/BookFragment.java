@@ -18,6 +18,7 @@ import com.example.huangzhaoyi.mvpapplication.Utils.BusProvider;
 import com.squareup.otto.Subscribe;
 
 /**
+ * View层的实现，负责UI展示
  * Created by huangzhaoyi on 2016/5/20.
  */
 public class BookFragment extends Fragment implements BookContract.View, View.OnClickListener {

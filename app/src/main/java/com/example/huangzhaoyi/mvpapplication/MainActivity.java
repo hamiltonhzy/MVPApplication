@@ -35,5 +35,4 @@ public class MainActivity extends BaseActivity<BookPresenter, BookModel> {
         this.mPresenter.setVM(mContext, mBookFragment, mModel);
     }
 
-
 }

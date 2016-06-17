@@ -4,6 +4,7 @@ import com.example.huangzhaoyi.mvpapplication.Contract.BookContract;
 import com.example.huangzhaoyi.mvpapplication.Entity.Book;
 
 /**
+ * M层的实现，负责获取数据
  * Created by huangzhaoyi on 2016/6/17.
  */
 public class BookModel implements BookContract.Model {

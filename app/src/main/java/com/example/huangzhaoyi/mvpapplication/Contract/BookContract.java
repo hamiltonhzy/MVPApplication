@@ -6,6 +6,7 @@ import com.example.huangzhaoyi.mvpapplication.Presenter.BasePresenter;
 import com.example.huangzhaoyi.mvpapplication.View.BaseView;
 
 /**
+ * 协议类，负责M、V、P的接口定义
  * Created by huangzhaoyi on 2016/5/20.
  */
 public interface BookContract {
