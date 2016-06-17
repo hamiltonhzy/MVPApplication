@@ -1,4 +1,4 @@
-package com.example.huangzhaoyi.mvpapplication.Model;
+package com.example.huangzhaoyi.mvpapplication.Entity;
 
 import java.io.Serializable;
 

@@ -1,28 +1,39 @@
 package com.example.huangzhaoyi.mvpapplication;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.huangzhaoyi.mvpapplication.Contract.BookContract;
 import com.example.huangzhaoyi.mvpapplication.Fragment.BookFragment;
+import com.example.huangzhaoyi.mvpapplication.Model.BookModel;
 import com.example.huangzhaoyi.mvpapplication.Presenter.BookPresenter;
 import com.example.huangzhaoyi.mvpapplication.Utils.ActivityUtils;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity<BookPresenter, BookModel> {
     private BookFragment mBookFragment;
-    private BookPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    }
 
-        mBookFragment = (BookFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_main;
+    }
 
+    @Override
+    public void initView() {
         if (mBookFragment == null) {
-            mBookFragment = BookFragment.newInstance();
+            this.mBookFragment = BookFragment.newInstance();
+            this.mBookFragment.setPresenter(mPresenter);
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), mBookFragment, R.id.contentFrame);
         }
-
-        mPresenter = new BookPresenter(mBookFragment);
     }
+
+    @Override
+    public void initPresenter() {
+        this.mPresenter.setVM(mContext, mBookFragment, mModel);
+    }
+
+
 }

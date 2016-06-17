@@ -6,17 +6,24 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.huangzhaoyi.mvpapplication.Contract.BookContract;
+import com.example.huangzhaoyi.mvpapplication.Event.BaseEvent;
+import com.example.huangzhaoyi.mvpapplication.Event.BookEvent;
+import com.example.huangzhaoyi.mvpapplication.Presenter.BookPresenter;
 import com.example.huangzhaoyi.mvpapplication.R;
+import com.example.huangzhaoyi.mvpapplication.Utils.BusProvider;
+import com.squareup.otto.Subscribe;
 
 /**
  * Created by huangzhaoyi on 2016/5/20.
  */
-public class BookFragment extends Fragment implements BookContract.View {
+public class BookFragment extends Fragment implements BookContract.View, View.OnClickListener {
     private BookContract.Presenter mPresenter;
-    private TextView mTxvBookId;
+    private TextView mTxvBookName;
+    private Button mBtnTest;
 
     public static BookFragment newInstance() {
         BookFragment fragment = new BookFragment();
@@ -26,27 +33,59 @@ public class BookFragment extends Fragment implements BookContract.View {
     @Override
     public void onResume() {
         super.onResume();
-        this.mPresenter.start();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        BusProvider.getInstance().register(this);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.book_fragment_layout, container, false);
-        this.mTxvBookId = (TextView) root.findViewById(R.id.txvBookId);
+        this.mTxvBookName = (TextView) root.findViewById(R.id.txvBookName);
+        this.mBtnTest = (Button) root.findViewById(R.id.btnTest);
+        this.mBtnTest.setOnClickListener(this);
         setRetainInstance(true);
         return root;
     }
 
     @Override
-    public void setPresenter(BookContract.Presenter presenter) {
-        if (presenter != null) {
-            mPresenter = presenter;
-        }
+    public void onDestroy() {
+        BusProvider.getInstance().unregister(this);
+        super.onDestroy();
     }
 
     @Override
+    public void setPresenter(BookContract.Presenter presenter) {
+        this.mPresenter = presenter;
+    }
+
     public void showBookName(String bookName) {
-        this.mTxvBookId.setText(bookName);
+        this.mTxvBookName.setText(bookName);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.btnTest) {
+            if (mPresenter != null) {
+                this.mPresenter.start();
+            }
+        }
+    }
+
+    @Subscribe
+    public void onEvent(BookEvent event) {
+        Object[] params = event.getParams();
+        switch (event.getEventId()) {
+            case BookEvent.EVENT_SHOW_BOOKNAME:
+                String bookName = (String) params[0];
+                showBookName(bookName);
+                break;
+            default:
+                break;
+        }
     }
 }
