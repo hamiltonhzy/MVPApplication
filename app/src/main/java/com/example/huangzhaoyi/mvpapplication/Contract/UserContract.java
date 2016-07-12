@@ -1,26 +1,24 @@
 package com.example.huangzhaoyi.mvpapplication.Contract;
 
-import com.example.huangzhaoyi.mvpapplication.Entity.Book;
 import com.example.huangzhaoyi.mvpapplication.Model.BaseModel;
 import com.example.huangzhaoyi.mvpapplication.Presenter.BasePresenter;
 import com.example.huangzhaoyi.mvpapplication.View.BaseView;
 
 /**
- * 协议类，负责M、V、P的接口定义
- * Created by huangzhaoyi on 2016/5/20.
+ * Created by huangzhaoyi on 2016/7/12.
  */
-public interface BookContract {
+public interface UserContract {
+
     interface Model extends BaseModel {
-        // 获取书
-        Book getBookItem();
+        boolean login();
     }
 
     interface View extends BaseView<Presenter> {
-        boolean isLogin();
+        void showName(String name);
     }
 
     abstract class Presenter extends BasePresenter<Model, View> {
-        // 加载数据
-        public abstract void loadData();
+
+        public abstract void login();
     }
 }

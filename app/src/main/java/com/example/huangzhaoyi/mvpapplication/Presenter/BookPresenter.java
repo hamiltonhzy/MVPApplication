@@ -6,7 +6,7 @@ import com.example.huangzhaoyi.mvpapplication.Event.BookEvent;
 import com.example.huangzhaoyi.mvpapplication.Utils.BusProvider;
 
 /**
- * P层的实现，负责连接V和M
+ * P层的实现，负责连接V和M，处理业务逻辑
  * Created by huangzhaoyi on 2016/5/20.
  */
 public class BookPresenter extends BookContract.Presenter {
@@ -23,7 +23,7 @@ public class BookPresenter extends BookContract.Presenter {
 
     @Override
     public void start() {
-        loadData();
+
     }
 
     @Override

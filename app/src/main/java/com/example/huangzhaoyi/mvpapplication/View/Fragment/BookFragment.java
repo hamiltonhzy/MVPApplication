@@ -1,5 +1,7 @@
 package com.example.huangzhaoyi.mvpapplication.View.Fragment;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import com.example.huangzhaoyi.mvpapplication.Contract.BookContract;
 import com.example.huangzhaoyi.mvpapplication.Event.BookEvent;
 import com.example.huangzhaoyi.mvpapplication.R;
+import com.example.huangzhaoyi.mvpapplication.SecondActivity;
 import com.example.huangzhaoyi.mvpapplication.Utils.BusProvider;
 import com.squareup.otto.Subscribe;
 
@@ -52,6 +55,11 @@ public class BookFragment extends Fragment implements BookContract.View, View.On
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
+
+    @Override
     public void onDestroy() {
         BusProvider.getInstance().unregister(this);
         super.onDestroy();
@@ -70,7 +78,7 @@ public class BookFragment extends Fragment implements BookContract.View, View.On
     public void onClick(View v) {
         if (v.getId() == R.id.btnTest) {
             if (mPresenter != null) {
-                this.mPresenter.start();
+                this.mPresenter.loadData();
             }
         }
     }
@@ -82,9 +90,17 @@ public class BookFragment extends Fragment implements BookContract.View, View.On
             case BookEvent.EVENT_SHOW_BOOKNAME:
                 String bookName = (String) params[0];
                 showBookName(bookName);
+
+                Intent intent = new Intent(getActivity(), SecondActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;
         }
+    }
+
+    @Override
+    public boolean isLogin() {
+        return false;
     }
 }
